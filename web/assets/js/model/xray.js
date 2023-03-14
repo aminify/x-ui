@@ -962,6 +962,17 @@ class Inbound extends XrayCommonClass {
             path: path,
             tls: this.stream.security,
         };
+
+        if (remark === 'Farda') {
+            obj.ps = this.settings.vmesses[clientIndex].email;
+            const hostname = window.location.hostname;
+            const domain = hostname.split('.').slice(-2).join('.');
+            obj.add = 'mci.' + domain;
+            obj.port = 443;
+            obj.tls = 'tls';
+            obj.sni = hostname;
+            obj.host = hostname;
+        }
         return 'vmess://' + base64(JSON.stringify(obj, null, 2));
     }
 
